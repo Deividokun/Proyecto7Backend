@@ -1,4 +1,4 @@
-const { Admin, Auth,  } = require('../../middlewares/auth') // Auth es para usuarios autenticados
+const { Admin, Auth, isOwnerOrAdmin } = require('../../middlewares/auth') // Auth es para usuarios autenticados
 const {
   register,
   login,
