@@ -51,7 +51,7 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    console.log('Datos recibidos:', req.body) // Aquí mostramos los datos recibidos en el login
+    console.log('Datos recibidos:', req.body) // Muestra los datos recibidos en el login
 
     const user = await buscarUsuario(req.body.NickName)
     if (!user) {
