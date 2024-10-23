@@ -42,7 +42,7 @@ const isOwnerOrAdmin = async (req, res, next) => {
   try {
     const token = req.headers.authorization;
     const parsedToken = token.replace('Bearer ', '');
-    const { id } = verifyJwt(parsedToken); // Decodifica el token para obtener el ID del usuario
+    const { id } = verifyJwt(parsedToken); 
 
     const user = await User.findById(id); 
     if (!user) {
@@ -61,4 +61,4 @@ const isOwnerOrAdmin = async (req, res, next) => {
     return res.status(403).json('Error de autenticación');
   }
 };
-module.exports = { Auth, Admin }
+module.exports = { Auth, Admin, isOwnerOrAdmin }
