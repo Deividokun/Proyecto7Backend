@@ -1,4 +1,4 @@
-const { Admin, Auth } = require('../../middlewares/auth') // Auth es para usuarios autenticados
+const { Admin, Auth,  } = require('../../middlewares/auth') // Auth es para usuarios autenticados
 const {
   register,
   login,
@@ -18,8 +18,7 @@ usersRoutes.post('/register', register)
 
 usersRoutes.post('/login', login)
 
-usersRoutes.put('/:id', updateUser)
-
-usersRoutes.delete('/:id', deleteUser)
+usersRoutes.put('/:id', [Auth, isOwnerOrAdmin], updateUser);
+usersRoutes.delete('/:id', [Auth, isOwnerOrAdmin], deleteUser);
 
 module.exports = usersRoutes
