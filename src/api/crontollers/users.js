@@ -90,36 +90,42 @@ const getUserById = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   try {
-    const userId = req.params.id
+    const userId = req.params.id;
+
+    
+    if (req.body.papel && req.user.papel !== 'admin') {
+      return res.status(403).json('Solo los administradores pueden cambiar el rol de un usuario');
+    }
 
     const updatedUser = await User.findByIdAndUpdate(userId, req.body, {
       new: true
-    })
+    });
 
     if (!updatedUser) {
-      return res.status(404).json('Usuario no encontrado')
+      return res.status(404).json('Usuario no encontrado');
     }
 
-    return res.status(200).json(updatedUser)
+    return res.status(200).json(updatedUser);
   } catch (error) {
-    return res.status(400).json(error)
+    return res.status(400).json(error);
   }
-}
+};
 
 const deleteUser = async (req, res, next) => {
   try {
-    const userId = req.params.id
+    const userId = req.params.id;
 
-    const deletedUser = await User.findByIdAndDelete(userId)
+    const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
-      return res.status(404).json('Usuario no encontrado')
+      return res.status(404).json('Usuario no encontrado');
     }
 
-    return res.status(200).json('Usuario eliminado correctamente')
+    return res.status(200).json('Usuario eliminado correctamente');
   } catch (error) {
-    return res.status(400).json(error)
+    return res.status(400).json(error);
   }
-}
+};
+
 
 module.exports = {
   GetUsr,
